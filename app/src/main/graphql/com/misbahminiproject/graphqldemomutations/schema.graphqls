@@ -1,0 +1,63 @@
+type Query {
+  """
+  Says hello to the person. If the person is not specified in the query, says hello to a default person.
+  """
+  hello(person: PersonInput): String!
+
+  """
+  Returns request metadata.
+  """
+  request: Request!
+}
+
+type Request {
+  """
+  Returns read-only request headers of the request sent.
+  """
+  headers: Headers!
+}
+
+scalar Headers
+
+"""
+Describes the Person type that will display either the inputPerson specified in the query request or deliver the default Person which is a hard coded name.
+"""
+type Person {
+  id: ID!
+
+  name: String!
+
+  age: Int
+}
+
+"""
+Describes the input type PersonInput you will use in the query specify the person you want to send a hello request to. This input type can also be used in the creation of a new object of type Person.
+"""
+input PersonInput {
+  name: String!
+
+  """
+  Age is not a mandatory field.
+  """
+  age: Int
+}
+
+type Mutation {
+  """
+  Creates a object of type Person that you can send a hello request to.
+  """
+  createPerson(person: PersonInput!): Person!
+}
+
+type Subscription {
+  """
+  Returns a stream of hello greetings in different languages.
+  """
+  greetings: String!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

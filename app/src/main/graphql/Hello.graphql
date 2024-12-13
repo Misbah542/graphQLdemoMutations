@@ -1,0 +1,3 @@
+query Hello($person: PersonInput) {
+    hello(person: $person)
+}
